@@ -12,8 +12,15 @@ class Crudapi extends RestController
         parent::__construct();
         // membuat limit method klick/jam 
         $this->methods['index_get']['limit'] = 5;
+        //PENGATURAN KEY
+        // rest_key_name = {wpu-key} dan valunya ada di ambil di dalam database
+        // rest_key_name confignya di rest.php 
 
-        // authetifikasi 
+        // PENGATURAN LIMIT 
+        // $this->methods['METHOD_NAME']['limit'] = [NUM_REQUESTS_PER_HOUR]
+        // $this->methods['METHOD_NAME']['limit']  confignya di rest.php 
+
+
     }
 
     public function getnoparam_get()

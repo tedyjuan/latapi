@@ -378,6 +378,7 @@ $config['rest_key_length'] = 40;
 | 2012/06/12. See RFC 6648 specification for more details
 |
 */
+// tedy 
 $config['rest_key_name'] = 'wpu-key';
 
 /*

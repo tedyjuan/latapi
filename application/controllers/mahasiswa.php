@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 use chriskacerguis\RestServer\RestController;
 
-class Crudapi extends RestController
+class Mahasiswa extends RestController
 {
 
     function __construct()
@@ -65,9 +65,9 @@ class Crudapi extends RestController
     {
         $id = $this->get('id');
         if ($id != null) {
-            $data = $this->db->get_where("user_details", ['user_id' => $id]);
+            $data = $this->db->get_where("mahasiswa", ['id' => $id]);
             if ($data->num_rows() > 0) {
-                $getdata = $this->db->get_where("user_details", ['user_id' => $id])->row_array();
+                $getdata = $this->db->get_where("mahasiswa", ['id' => $id])->row_array();
                 $this->response($getdata, RestController::HTTP_OK);
                 // $this->response($data->row_array(), 200);
             } else {
@@ -77,8 +77,7 @@ class Crudapi extends RestController
                 ], 404);
             }
         } else {
-            // $users = $this->db->get('mahasiswa')->result();
-            $users = $this->db->get('user_details')->result();
+            $users = $this->db->get('mahasiswa')->result();
             $this->response($users, RestController::HTTP_OK);
         }
     }
@@ -86,14 +85,12 @@ class Crudapi extends RestController
     public function index_post()
     {
         $data = array(
-            "username"   => $this->post('username'),
-            "first_name" => $this->post('first_name'),
-            "last_name"  => $this->post('last_name'),
-            "gender"     => $this->post('gender'),
-            "password"   => $this->post('password'),
-            "status"     => $this->post('status'),
+            "nama"    => $this->post('nama', true),
+            "nrp"     => $this->post('nrp', true),
+            "email"   => $this->post('email', true),
+            "jurusan" => $this->post('jurusan', true),
         );
-        $insert = $this->db->insert('user_details', $data);
+        $insert = $this->db->insert('mahasiswa', $data);
         if ($insert) {
             $this->response($data, RestController::HTTP_OK);
         } else {
@@ -109,17 +106,15 @@ class Crudapi extends RestController
 
     public function index_put()
     {
-        $id = $this->put("user_id");
+        $id = $this->put("id");
         $data = array(
-            "username"   => $this->put('username'),
-            "first_name" => $this->put('first_name'),
-            "last_name"  => $this->put('last_name'),
-            "gender"     => $this->put('gender'),
-            "password"   => $this->put('password'),
-            "status"     => $this->put('status'),
+            "nama"    => $this->put('nama', true),
+            "nrp"     => $this->put('nrp', true),
+            "email"   => $this->put('email', true),
+            "jurusan" => $this->put('jurusan', true),
         );
-        $this->db->where("user_id", $id);
-        $update = $this->db->update('user_details', $data);
+        $this->db->where("id", $id);
+        $update = $this->db->update('mahasiswa', $data);
         if ($update) {
             $this->response($data, RestController::HTTP_OK);
         } else {
@@ -135,11 +130,11 @@ class Crudapi extends RestController
 
     public function index_delete()
     {
-        $id = $this->delete("user_id");
-        $cek = $this->db->get_where("user_details", ["user_id" => $id])->num_rows();
+        $id = $this->delete("id");
+        $cek = $this->db->get_where("mahasiswa", ["id" => $id])->num_rows();
         if ($cek > 0) {
-            $this->db->where('user_id', $id);
-            $delete = $this->db->delete('user_details');
+            $this->db->where('id', $id);
+            $delete = $this->db->delete('mahasiswa');
             if ($delete) {
                 $this->response([
                     "status" => "Success",

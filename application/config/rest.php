@@ -383,6 +383,7 @@ $config['rest_key_length'] = 40;
 |
 */
 // tedy 
+// $config['rest_key_name'] = 'X-API-KEY';
 $config['rest_key_name'] = 'wpu-key';
 
 /*
@@ -494,8 +495,8 @@ $config['rest_logs_json_params'] = false;
 | See application/controllers/api/example.php for examples
 */
 //tedy (defaultnya false)
-// $config['rest_enable_limits'] = false;
-$config['rest_enable_limits'] = true;
+$config['rest_enable_limits'] = false;
+// $config['rest_enable_limits'] = true;
 
 /*
 |--------------------------------------------------------------------------
